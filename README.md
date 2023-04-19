@@ -44,3 +44,7 @@ Hello World
 ```sh
 pandoc example.md --syntax-defintion=uxn.xml > example.html
 ```
+
+![Default syntax colours](https://user-images.githubusercontent.com/11114594/232969093-4715a503-d726-4d9c-968d-2454694cdb3d.png)
+
+The colours in the image are the default Pandoc CSS styles, colours can be easily changed with a bit of CSS wizzardry.
