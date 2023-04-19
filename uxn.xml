@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language name="uxntal" version="1" kateversion="2.4" section="Sources" extensions="*.tal">
+    <highlighting>
+        <list name="opcodes">
+            <item>LIT</item>
+            <item>BRK</item>
+            <item>INC</item>
+            <item>POP</item>
+            <item>NIP</item>
+            <item>SWP</item>
+            <item>ROT</item>
+            <item>DUP</item>
+            <item>OVR</item>
+            <item>JCI</item>
+            <item>EQU</item>
+            <item>NEQ</item>
+            <item>GTH</item>
+            <item>LTH</item>
+            <item>JMP</item>
+            <item>JCN</item>
+            <item>JSR</item>
+            <item>STH</item>
+            <item>JMI</item>
+            <item>LDZ</item>
+            <item>STZ</item>
+            <item>LDR</item>
+            <item>STR</item>
+            <item>LDA</item>
+            <item>STA</item>
+            <item>DEI</item>
+            <item>DEO</item>
+            <item>JSI</item>
+            <item>ADD</item>
+            <item>SUB</item>
+            <item>MUL</item>
+            <item>DIV</item>
+            <item>AND</item>
+            <item>ORA</item>
+            <item>EOR</item>
+            <item>SFT</item>
+        </list>
+        <contexts>
+            <context attribute="Normal Text" lineEndContext="#pop" name="Normal Text" >
+                <RegExpr attribute="Comment" context="#stay" String="\(.*\)" />
+                <RegExpr context="Device" lookAhead="true" String="(@|&amp;)([A-z]*)" />
+                <RegExpr context="Macro" lookAhead="true" String="(%)([A-z]*)" />
+                <RegExpr context="Padding" lookAhead="true" String="(\$|\||#)(([A-z]|[0-9])*)" />
+                <RegExpr context="DeviceCall" lookAhead="true" String="(\.)([A-z]*)(\/)([A-z]*)" />
+                <RegExpr context="RawAscii" lookAhead="true" String="(&quot;)(([A-z]|[0-9])*)" />
+                <keyword attribute="Opcode" context="#stay" String="opcodes" />
+
+                <!-- I don't know how to properly match defined macros... -->
+                <RegExpr attribute="Opcode" context="#stay" String="([A-Z])*" />
+            </context>
+
+            <context name="Device" attribute="Normal Text" lineEndContext="#pop">
+                <StringDetect context="#stay" attribute="Operator" String="%1" dynamic="true"/>
+                <StringDetect context="#pop" attribute="Device" String="%2" dynamic="true"/>
+            </context>
+
+            <context name="Macro" attribute="Normal Text" lineEndContext="#pop">
+                <StringDetect context="#stay" attribute="Operator" String="%1" dynamic="true"/>
+                <StringDetect context="#pop" attribute="Macro" String="%2" dynamic="true"/>
+            </context>
+
+            <context name="Padding" attribute="Normal Text" lineEndContext="#pop">
+                <StringDetect context="#stay" attribute="Operator" String="%1" dynamic="true"/>
+                <StringDetect context="#pop" attribute="Padding" String="%2" dynamic="true"/>
+            </context>
+
+            <context name="DeviceCall" attribute="Normal Text" lineEndContext="#pop">
+                <StringDetect context="#stay" attribute="Operator" String="%1" dynamic="true"/>
+                <StringDetect context="#stay" attribute="DeviceCall" String="%2" dynamic="true"/>
+                <StringDetect context="#stay" attribute="Operator" String="%3" dynamic="true"/>
+                <StringDetect context="#pop" attribute="DeviceCall" String="%4" dynamic="true"/>
+            </context>
+
+            <context name="RawAscii" attribute="Normal Text" lineEndContext="#pop">
+                <StringDetect context="#stay" attribute="Operator" String="%1" dynamic="true"/>
+                <StringDetect context="#pop" attribute="Char" String="%2" dynamic="true"/>
+            </context>
+        </contexts>
+        <itemDatas>
+            <itemData name="Normal Text"   defStyleNum="dsNormal"/>
+            <itemData name="Comment" defStyleNum="dsComment"/>
+            <itemData name="Opcode" defStyleNum="dsBuiltIn"/>
+            <itemData name="Operator" defStyleNum="dsOperator" />
+            <itemData name="Device" defStyleNum="dsAttribute" />
+            <itemData name="DeviceCall" defStyleNum="dsExtension" />
+            <itemData name="Macro" defStyleNum="dsFunction" />
+            <itemData name="Padding" defStyleNum="dsDataType" />
+            <itemData name="Char" defStyleNum="dsChar" />
+        </itemDatas>
+    </highlighting>
+</language>
