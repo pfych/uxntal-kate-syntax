@@ -2,9 +2,15 @@
 
 This syntax defintion is **_not_** fully complete. 
 
-This definition file was created to be used alongside Pandoc to add syntax highlighting to generated HTML documents. This is the first time I've created a file like this, so it's not perfect.
+## Goals
+
+I like to take notes when learning a programming language, this is the first time my notes on my site havent had syntax highlighting. So _obviously_ instead of learning the language I should write syntax defintions for it...
+
+Please feel free to open Issues and PRs! I've likely made mistakes...
 
 ## Usage
+
+This definition file was created to be used alongside Pandoc to add syntax highlighting to generated HTML documents.
 
 ````
 # Markdown Example
