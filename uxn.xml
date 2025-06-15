@@ -41,7 +41,7 @@
         </list>
         <contexts>
             <context attribute="Normal Text" lineEndContext="#pop" name="Normal Text" >
-                <RegExpr attribute="Comment" context="#stay" String="\(.*\)" />
+                <RegExpr attribute="Comment" context="#stay" String="\((?:[^)(]+|(?R))*+\)" />
                 <RegExpr context="Device" lookAhead="true" String="(@|&amp;)([A-z]*)" />
                 <RegExpr context="Macro" lookAhead="true" String="(%)([A-z]*)" />
                 <RegExpr context="Padding" lookAhead="true" String="(\$|\||#)(([A-z]|[0-9])*)" />
